@@ -24,5 +24,7 @@
 ### 6. Photo
 - https://pub.dev/packages/image_editor_pro
 - https://pub.dev/packages/photofilters
+### 7. Flutter travelling mobile app UI design speed code
+- https://www.youtube.com/watch?v=yD0R3imbtbA
 
 
