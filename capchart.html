@@ -1,9 +1,9 @@
 <html>
 <head>
-  <script src="https://www.google.com/recaptcha/api.js?render=6LfUuqkZAAAAANaCs8fDELM5BDBxYx5wrZ_hS0GH"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render={key}"></script>
 <script>
 grecaptcha.ready(function() {
-    grecaptcha.execute('6LfUuqkZAAAAANaCs8fDELM5BDBxYx5wrZ_hS0GH', {action: 'register_action'}).then(function(token) {
+    grecaptcha.execute({key}, {action: 'register_action'}).then(function(token) {
       try {
         RecaptchaFlutterChannel.postMessage(token);
       } catch (e) {
