@@ -18,6 +18,7 @@
 - 2 icon: 512x512
 - 3 image: 1024x500
 - 4 onesignale icon http://romannurik.github.io/AndroidAssetStudio/icons-notification.html
+- Tạo icon https://makeappicon.com/
 
 ### C Up app:
 - 1 kiểm tra config ads, debug, link appstore
