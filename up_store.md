@@ -10,8 +10,8 @@
               1920 x 1080 pixels (Physical Pixels)
   1.3 12.9 inch (iPad Pro (3rd generation)) 
               2732 x 2048 pixels (4:3 aspect ratio)
-- Icon: tool icon: https://appiconmaker.co/
 ```
+- Icon: tool icon: https://appiconmaker.co/
   
 ### B Android
 - 1 screen short: đẹp là đc
