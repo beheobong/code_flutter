@@ -6,6 +6,8 @@
 ### setup flutter 
 - https://web.archive.org/web/20180210044548/http://spring.io/guides/gs/android/
 
+### emoiji: https://www.webfx.com/tools/emoji-cheat-sheet/
+
 ## I. Dart Online:
 - https://dartpad.dartlang.org/
 
