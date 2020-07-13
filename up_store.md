@@ -38,6 +38,7 @@
 - this copy of the install macos mojave application is damaged and can‘t be used to install macos: date 010101002018
 - Resolving duplicate serial numbers for macOS Virtual Machines.:
 https://support.watchmanmonitoring.com/hc/en-us/articles/213487906-Resolving-duplicate-serial-numbers-for-macOS-Virtual-Machines-
-   
 
-              
+### F: Android: install .apk programmatically [duplicate]
+
+- https://stackoverflow.com/a/4969421/10819917
