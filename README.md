@@ -221,4 +221,6 @@ This is a known issue.
 ### 33 Android: install .apk programmatically [duplicate]
 - https://stackoverflow.com/a/4969421
 
+### 34 Localizing the Cut|Copy|Paste menu on iOS
+- https://stackoverflow.com/a/11282184/10819917
 
