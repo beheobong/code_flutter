@@ -224,3 +224,6 @@ This is a known issue.
 ### 34 Localizing the Cut|Copy|Paste menu on iOS
 - https://stackoverflow.com/a/11282184/10819917
 
+### 35 How to check internet connection is online /offline in application background?
+- https://www.thetopsites.net/article/55216740.shtml
+
