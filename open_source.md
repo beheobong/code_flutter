@@ -28,4 +28,7 @@
 ### 7. Flutter ecommerce App
 - https://github.com/Tarikul711/flutter-ecommerce
 
+### 8. Car Rental - Speed Code
+- https://github.com/gerfagerfa/car_rental
+
 
