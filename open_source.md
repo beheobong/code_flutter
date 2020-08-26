@@ -31,4 +31,6 @@
 ### 8. Car Rental - Speed Code
 - https://github.com/gerfagerfa/car_rental
 
+### 9. Flutter Food Delivery Application Design
+- https://github.com/Tarikul711/flutter-food-delivery-app-ui
 
