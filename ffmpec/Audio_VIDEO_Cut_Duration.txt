@@ -1,0 +1,25 @@
+ffmpeg -ss 0 -t 30 -i file.mp3 file.wav
+>> -ss 0 - Start at 0 seconds
+>> -t 30 - Capture 30 seconds (from 0, so 0:00 - 0:30). If you want 1 minute of audio, use -t 60.
+>> file.mp3 - Input file
+>> file.wav - output file
+
+#Refs: http://stackoverflow.com/a/7945753/938427
+
+Video cut
+http://superuser.com/a/377407/602895
+
+ffmpeg -ss [start] -i in.mp4 -t [duration] -c copy out.mp4
+
+
+Extra: Cut duration without re-encoding:
+
+EDIT: I found it, just add "-acodec copy" . 
+
+ffmpeg -ss [start] -i in.mp4 -t [duration] -c copy out.mp4 -acodec copy
+
+VD:
+D:\Programs\FFMPEG\bin>ffmpeg -ss 0 -t 15 -i audio/Sad-Maroon_5.mp3 -acodec copy
+ out_ad_cutted_15_encode_1.mp3
+
+Refs: http://superuser.com/questions/138331/using-ffmpeg-to-cut-up-video

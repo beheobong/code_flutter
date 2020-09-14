@@ -1,0 +1,16 @@
+ffmpeg -i out_merged_mp3_audio.mp4 -i border/border1.png -filter_complex "[0:v][1:v] overlay=25:25:enable='between(t,0,20)'" -pix_fmt yuv420p -c:a copy output_front1.mp4
+
+ NOTE:
+overlay=25:25 means we want to position the image 25px to the left and 25px down, originating from the top left corner.
+
+enable='between(t,0,20)' means we want the image to show between second 0 and 20.
+
+If you want a certain image quality/settings and not the settings ffmpeg chooses, add the image and or audio encoding options you want to use. The default video encoder will be x264. Check the H.264 encoding guide for possible settings.
+
+The -acodec copy / -c:a copy that you have in your command f.e. would simply re-use the audio from the source file. Though you can't do that with the video of course (in this case), that has to be transcoded.
+
+If you want to transcode audio, remove the -c:a copy part. You may have to explicitly specify an encoder, e.g. -c:a aac -strict experimental
+
+- Remove ":enable='between(t,0,20)'" if you want add overlay image to all duration.
+
+#Refs: http://video.stackexchange.com/a/12111

@@ -1,0 +1,29 @@
+
+To double the speed of the video, you can use:
+
+>> ffmpeg -i input.mkv -filter:v "setpts=0.5*PTS" output.mkv
+The filter works by changing the presentation timestamp (PTS) of each video frame. For example, if there are two succesive frames shown at timestamps 1 and 2, and you want to speed up the video, those timestamps need to become 0.5 and 1, respectively. Thus, we have to multiply them by 0.5.
+
+Note that this method will drop frames to achieve the desired speed. You can avoid dropped frames by specifying a higher output frame rate than the input. For example, to go from an input of 4 FPS to one that is sped up to 4x that (16 FPS):
+
+ffmpeg -i input.mkv -r 16 -filter:v "setpts=0.25*PTS" output.mkv
+To slow down your video, you have to use a multiplier greater than 1:
+
+>>> ffmpeg -i input.mkv -filter:v "setpts=2.0*PTS" output.mkv
+
+ffmpeg -i input.mp4 -vf “setpts=(1/<speed>)*PTS” output.mp4
+
+Change fps and remove audio in video:
+
+ffmpeg -i slowmo120.mp4 -r 120 -vf "setpts=(1/4)*PTS" -an realtime120.mp4
+
+
+#Refs: https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video
+http://www.blurbusters.com/faq/real-time-120fps-video/
+https://www.youtube.com/watch?v=LT8oeypC_ek
+
+
+Slow motion;
+
+>ffmpeg -i dance.mp4 -r 120 -filter:v  "setpts=3*PTS" -an
+dance_slow12.mp4 -y

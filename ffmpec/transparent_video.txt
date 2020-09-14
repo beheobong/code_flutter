@@ -1,0 +1,37 @@
+﻿ffmpeg -loop 1 -s 4cif -i border/a2.gif -r 25 -vframes 250 -vcodec png -pix_fmt bgra border/test.mov 
+
+ffmpeg -i ? -loop -t ? -r 5 -i ? -filter_complex nullsrc=size=480x480[base];
+[0:v]setpts=PTS-STARTPTS, scale=480:-2[upperleft];[1:v]setpts=PTS-STARTPTS,scale=480:480[upperright];
+[base][upperleft]overlay=shortest=1:x=0:y=0[tmp1];[tmp1][upperright]overlay=shortest=0:x=0:y=0
+-vcodec mpeg4 -q:v 3 -acodec ouput_video.mp4 
+
+ex ==>
+
+ffmpeg -i border/out_border.mp4 -loop 1 -t 30 -r 5 -i border/Video.mp4 -filter_complex nullsrc=size=720x720[base];
+[0:v]setpts=PTS-STARTPTS, scale=720:-2[upperleft];[1:v]setpts=PTS-STARTPTS,scale=720:720[upperright];
+[base][upperleft]overlay=shortest=1:x=0:y=0[tmp1];[tmp1][upperright]overlay=shortest=0:x=0:y=0
+-vcodec mpeg4 -q:v 3 -acodec border/ouput_video.mp4 
+
+ffmpeg -i border/out_border.mp4 -loop 1 -t 11 -r 5 -i border/Video.mp4 -filter_complex nullsrc=size=720x720[base];[0:v]setpts=PTS-STARTPTS,scale=720:-2,transpose=1[upperleft];[1:v]setpts=PTS-STARTPTS,scale=720:720[upperright];[base][upperleft]overlay=shortest=1:x=0:y=0[tmp1];[tmp1][upperright]overlay=shortest=0:x=0:y=0 -vcodec mpeg4 -q:v 3 -acodec border/ouput_video.mp4 
+
+
+
+Demo final:
+
+ffmpeg -i border/out_border.mp4  -i border/Video.mp4 -filter_complex 
+
+"nullsrc=size=720x720[base];
+[0:v]setpts=PTS-STARTPTS,scale=360x360[upperleft];
+[1:v]setpts=PTS-STARTPTS,scale=360x360[upperright];
+[base][upperleft]overlay=shortest=1[tmp1];
+[tmp1][upperright]overlay=shortest=1:x=360"
+-c:v libx264 border/ouput_video.mp4 
+==>
+ffmpeg -i border/out_border.mp4  -i border/Video.mp4 -filter_complex "nullsrc=size=720x720[base];[0:v]setpts=PTS-STARTPTS,scale=360x360[upperleft];[1:v]setpts=PTS-STARTPTS,scale=360x360[upperright];[base][upperleft]overlay=shortest=1[tmp1];[tmp1][upperright]overlay=shortest=1:x=360" -c:v libx264 border/ouput_video.mp4 
+================
+D:\Programs\FFMPEG\1ffmpeg-20161027-bf14393-win64-static\bin>ffmpeg -i border/Vi
+deo.mp4 -i border/Comp3_1.mov -loop 5 -t 49 -r 25 -filter_complex "nullsrc=size=
+720x720[base];[0:v]setpts=PTS-STARTPTS,scale=720x720[upperleft];[1:v]setpts=PTS-
+STARTPTS,scale=720x720[upperright];[base][upperleft]overlay=shortest=1:x=0:y=0[t
+mp1];[tmp1][upperright]overlay=shortest=1:x=0:y=0" -c:v libx264 border/ouput_vid
+eo.mp4

@@ -1,0 +1,97 @@
+﻿Merge video with audio
+1. WAV
+vcodec
+ffmpeg -i  out_vcodec.mp4  -i  audio/Kalimba.wav -vcodec  mpeg4  -q:v  3  -c:v  copy  -c:a  aac  -strict  experimental  -shortest  out_merged_audio.mp4
+
+yuv420p
+ffmpeg -i  out_vcodec.mp4  -i  audio/Kalimba.wav -pix_fmt yuv420p  -q:v  3  -c:v copy  -c:a  aac  -strict  experimental  -shortest  out_merged_audio.mp4
+
+2.MP3
+ffmpeg -i  out_merged_audio.mp4 -i  audio/Sleep_Away.aac -vcodec  mpeg4  -q:v  3  -c:v  copy  -c:a  aac  -strict  experimental  -shortest  out_merged_mp3_audio.mp4
+
+Notice:
+- Remove "-shortest" to not cut video 
+ you need -shortest to tell it to stop after the audio stream is finished. 
+
+[mp4 @ 00000000004e1dc0] Using AVStream.codec to pass codec parameters to muxers
+ is deprecated, use AVStream.codecpar instead.
+
+Or
+ffmpeg -i out_vcodec.mp4 -i audio/Sad-Maroon_5.mp3 -c:v copy -c:a aac -strict experimental -shortest video_and_audio_cutted.mp4
+
+
+#Refs: 
++ https://trac.ffmpeg.org/wiki/Create%20a%20video%20slideshow%20from%20images#Addingaudio
++ http://www.labnol.org/internet/useful-ffmpeg-commands/28490/
+
+Add Effect > Add Audio => No Audio
+-> Fix: ffmpeg -i  output_merge_video.mp4  -i  audio/Sleep_Away.aac -map 0:v -map 1:a -c:v copy -strict experimental -shortest test12.mp4
+http://stackoverflow.com/a/11783474/938427
+
+========== IF VIDEO CONTAIN EXISTING SOUND =============
+
+See: http://stackoverflow.com/questions/24804928/singler-line-ffmpeg-cmd-to-merge-video-audio-and-retain-both-audios
+https://trac.ffmpeg.org/wiki/How%20to%20change%20audio%20volume%20up-down%20with%20FFmpeg
+
+Step1: 
+
+
+11
+down vote
+there can be achieved without using map also.
+
+ffmpeg -i video.mp4 -i audio.mp3 output.mp4
+
+in case u want the output.mp4 to stop as soon as one of the input stops (audio/video) then use
+
+-shortest
+
+example:
+
+ffmpeg -i video.mp4 -i audio.mp3 -shortest output.mp4
+
+this will make sure that the output stops as and when any one of the inputs is completed.
+
+since u have asked that u want to do it with map. this is how u do it.
+
+ffmpeg -i video.mp4 -i audio.mp3 -map 0:0 -map 1:0 -shortest output.mp4
+
+now since u want to retain the audio of the video file.
+
+the solution is,
+
+consider u want to merge audio.mp3 and video.mp4
+
+step 1) extract audio from the video.mp4
+
+ffmpeg -i video.mp4 1.mp3
+
+step 2) merge both audio.mp3 and 1.mp3
+
+ffmpeg -i audio.mp3 -i 1.mp3  -filter_complex amerge -c:a libmp3lame -q:a 4 audiofinal.mp3
+
+step 3)remove the audio from video.mp4 (this step is not required. but just to do it properly)
+
+ffmpeg -i video.mp4 -an videofinal.mp4
+
+step 4) now merge audiofinal.mp3 and videofinal.mp4
+
+ffmpeg  -i videofinal.mp4 -i audiofinal.mp3 -shortest final.mp4
+
+in the latest version of ffmpeg it will only prompt u to use '-strict -2' in case it does then use this
+
+ffmpeg  -i videofinal.mp4 -i audiofinal.mp3 -shortest -strict -2 final.mp4
+
+hope this helps.
+
+=============
+Step Change audio volume:
+To turn the audio volume up or down, you may use FFmpeg's Audio Filter named ​volume, like in the following example. If we want our volume to be half of the input volume:
+
+ffmpeg -i input.wav -af "volume=0.5" output.wav
+150% of current volume:
+
+ffmpeg -i input.wav -af "volume=1.5" output.wav
+If you are familiar with decibels you can also use dB:
+
+ffmpeg -i input.wav -af "volume=10dB" output.wav

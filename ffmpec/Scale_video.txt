@@ -1,0 +1,5 @@
+1. ffmpeg -i Video/effect1.mp4 -vf scale=720:720,setsar=sar=1/1 abc.mp4
+(Less storage)
+
+2. ffmpeg -i Video/effect1.mp4 -q:v 1 -vcodec mpeg4 -vf scale=720:720,setsar=sar=1/1 abc.mp4
+(max storage)

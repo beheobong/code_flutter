@@ -1,0 +1,29 @@
+﻿[Convert list image to Video:]
+
++ Use: libx264 (slow gen, less storage)
+ffmpeg -framerate 1/3 -start_number 1 -i list/h%d.jpg -c:v libx264 -r 30 -pix_fmt yuv420p -vf scale=trunc(iw/2)*2:trunc(ih/2)*2 out_scale_1.mp4 -y
+
+>> Scale 1/2 width and height: -vf scale=trunc(iw/2)*2:trunc(ih/2)*2
+>> Scale width, keep height: -vf scale=trunc(oh*a/2)*2:720 out_scale.mp4
+
+
++ Use: vcodec MPEG (Fast gen, max storage) (can be Read on Emulator)
+ffmpeg -framerate 1/3 -start_number 1 -i list/h%d.jpg -q:v 5 -vcodec mpeg4 -r 30 -pix_fmt yuv420p -vf scale=720:720  out_vcodec.mp4
+
+use setsar with scale : https://www.ffmpeg.org/ffmpeg-all.html#setdar_002c-setsar (see Units.txt)
+ffmpeg -framerate 1/3 -start_number 1 -i list/h%d.jpg -q:v 5 -vcodec mpeg4 -r 30 -pix_fmt yuv420p -vf scale=320:320,setsar=sar=1/1 out_vcodec.mp4
+
+
+
+>> Extra:
+Color space conversion and chroma sub-sampling
+By default when using libx264, and depending on your input, ffmpeg will attempt to avoid color subsampling. 
+Technically this is preferred, but unfortunately almost all video players, 
+excluding FFmpeg based players, and many online video services only support the YUV color space with 4:2:0 chroma subsampling. 
+Using the options -pix_fmt yuv420p or -vf format=yuv420p will maximize compatibility.
+
+References: 
+- https://trac.ffmpeg.org/wiki/Create%20a%20video%20slideshow%20from%20images
+- http://www.catswhocode.com/blog/19-ffmpeg-commands-for-all-needs
+
+-q:v 1 (1-10) Quality video (maximum 1, min 10)

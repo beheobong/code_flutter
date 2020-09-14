@@ -1,0 +1,5 @@
+ffmpeg -i input.mov -r 0.25 output_%04d.png
+
+-r seconds
+
+Link: http://superuser.com/a/729351

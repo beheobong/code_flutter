@@ -1,0 +1,47 @@
+﻿Vd1: 
+
+ffmpeg -i input.mp4 -filter:v "drawtext=fontfile='/usr/share/fonts/truetype/freefont/FreeSans.ttf':text='Hello World':fontcolor=white@1.0:fontsize=16:y=h-line_h-100:x=w/10*mod(t\,10):enable=gt(mod(t\,20)\,10)" -codec:v libx264 -codec:a copy -y output.mp4
+
+ffmpeg -i DECODE/Video.mp4 -filter:v "drawtext=fontfile='Font/BreeSerif.otf':text='Hello World':fontcolor=white@1.0:fontsize=16:y=h-line_h-100:x=w/10*mod(t\,10):enable=gt(mod(t\,20)\,10)" -codec:v libx264 -codec:a copy -y output_font.mp4
+
+REAL:
+D:\Programs\FFMPEG\bin>ffmpeg -i DECODE/Video.mp4 -filter:v "drawtext=fontfile='
+Font/BreeSerif.otf':text='ANH YEU EM RAT NHIEU EM CO BIET KHONG EM OI':fontcolor
+=red:fontsize=16:y=h-line_h-100:x=w/2*mod(t\,2):enable=gt(mod(t\,90)\,5)" output
+_font.mp4 -y
+
+enable=gt(mod(t\,90)\,5): 
+> 5: Thời gian xuất hiện text
+> fontcolor=white (có thể thay thế bằng màu fontcolor='#E8728C')
+
+
+
+Vd2:
+
+-vf "drawtext=fontcolor=white:fontsize=40:fontfile='C\:\\Windows\\Fonts\\arial.ttf':textfile='C\:\\text.txt':reload=1:y=h-line_h-52:x=w-(mod(4*n\,w+tw)-tw/40)"
+
+ffmpeg -i DECODE/Video.mp4 -vf "drawtext=fontcolor=white:fontsize=40:fontfile='Font/BreeSerif.otf':textfile='DECODE/a.txt':reload=1:y=h-line_h-52:x=w-(mod(4*n\,w+tw)-tw/40)"
+> REAL:
+
+D:\Programs\FFMPEG\bin>ffmpeg -i DECODE/Video.mp4 -vf "drawtext=fontcolor=red:fo
+ntsize=40:box=1:boxcolor='green'@0.3=fontfile='Font/BreeSerif.otf':textfile='DECODE/a.txt':reload=1:y=h-lin
+e_h-52:x=w-(mod(4*n\,w+tw)-tw/40)" output_font.mp4 -y
+
+Fast speed:
+D:\Programs\FFMPEG\bin>ffmpeg -i DECODE/Video.mp4 -vf "drawtext=fontcolor=red:fo
+ntsize=40:fontfile='Font/BreeSerif.otf':textfile='DECODE/a.txt':reload=0:y=h-lin
+e_h-92:x=w-(mod(50*n\,w+tw)-tw/92)" output_font.mp4 -y
+
+>box=1:boxcolor='green'@0.3: Dùng để đổ nền cho text (0.3 quy định alpha)
+> reload: boolean (0|1)
+> y=h-line_h-52: (52 là padding bottom của text)
+Để y cho text giữa màn hình dùng (h/2)
+> x: (k dùng x text sẽ đứng yên k chạy)
+> tw/40 (40 càng cao càng chạy nhanh)
+> mod(50: Như trên - Đối với video có fps thấp thì phải tăng 2 tham số này rất cao)
+ví dụ: mod(50*n\,w+tw)-tw/150)
+
+link:
+https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/issues/374
+http://superuser.com/questions/1026763/scrolling-from-right-to-left-in-ffmpeg-drawtext/1126114#1126114
+http://stackoverflow.com/questions/32737643/ffmpeg-moving-text-to-appear-every-x-seconds/32740489#32740489

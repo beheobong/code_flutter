@@ -1,0 +1,47 @@
+I,
+ffmpeg -i input1.mp3 -i input2.mp3 -i input3.mp3 -filter_complex concat=n=3:v=0:a=1 -f MOV -vn -y input.m4a
+
+Meanings of : " -filter_complex concat=n=3:v=0:a=1" : 
+concat means use the media concatenate (joining) function.
+n means confirm total count of input files.
+v means has video? use 0 = no video, 1 = contains video.
+a means has audio? use 0 = no audio, 1 = contain audio.
+-f means force set file format (to see all supported formats, use ffmpeg -formats)
+-vn means disable video (and also -an would disable audio if not wanted)
+-y means overwrite output files (if the output file already exists).
+
+II,
+FFmpeg has three concat methods.
+
++ concat protocol
+ffmpeg -i 'concat:input1|input2' -codec copy output
+
++ concat video filter
+ffmpeg -i opening.mkv -i episode.mkv -i ending.mkv \
+  -filter_complex '[0:0] [0:1] [1:0] [1:1] [2:0] [2:1] concat=n=3:v=1:a=1 [v] [a]' \
+  -map '[v]' -map '[a]' output.mkv
+
++ concat demuxer
+$ cat mylist.txt
+file '/path/to/file1'
+file '/path/to/file2'
+file '/path/to/file3'
+
+$ ffmpeg -f concat -i mylist.txt -c copy output.mp4
+
+(Note: Write file with UTF-8 format)
+
+>> Which one to use
+concat protocol: use with formats that support file level concatenation (MPEG-1, MPEG-2 PS, DV).
+concat filter: use if you need to re-encode such as when applying filters.
+concat demuxer: use when you want to avoid a re-encode and your format does not support file level concatenation.
+If in doubt try the concat demuxer.
+
+See: 
+http://stackoverflow.com/a/22958746/938427
+or
+http://stackoverflow.com/a/11175851/938427
+
+Ex: 
+>> ffmpeg -i Video/video3_ver1.avi -i Video/video3_ver2.avi -filter_complex concat=n=2:v=1:a=1 -f MOV -y output_append.avi
+>> 

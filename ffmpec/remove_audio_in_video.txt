@@ -1,0 +1,4 @@
+ffmpeg -i example.mkv -c copy -an example-nosound.mkv
+
+
+#Refs: http://superuser.com/a/268986/602895

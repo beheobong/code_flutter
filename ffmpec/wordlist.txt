@@ -1,0 +1,521 @@
+
+
+
+
+ffmpeg -r 1/10 -start_number 0 -i image%02d.jpg -c:v libx264 -vf "fps=56,format=yuv420p" out1.mp4
+
+
+
+//doan comander nay de giup tao video co hieu ung do 
+
+ffmpeg -i audio.mp3 -r 1/10 -start_number 0 -i image%02d.jpg -c:v libx264 -vf "fps=40,format=yuv420p" -c:a copy -shortest outhgeh.mp4 
+
+
+test thuu truong hop kia nhe 
+
+
+
+ffmpeg -i audio.mp3 -r 1/10 -start_number 01 -i image%02d.jpg -c:v libx264 -vf "fps=56,format=yuv420p" -c:a copy -shortest outhgeh.mov 
+
+add nhung neu  ma no dung muon chay het bai hat thi sao
+
+cho frame chay tai thoi diem nao thoi diem na o
+
+-r bao nhieu fram tren 1 s
+
+
+
+
+
+
+
+
+ -r 0.5 -s 640x480 foo.avi
+
+
+
+
+-loop để làm gi
+
+
+ffmpeg -loop 1 -i image.jpg -loop 1 -i image02.jpg -loop 1 -i image03.jpg -loop 1 -i image04.jpg -loop 1 -i image05.jpg -filter_complex "[0:v]trim=duration=15,fade=t=out:st=14.5:d=0.5[v0];  [1:v]trim=duration=15,fade=t=in:st=0:d=0.5,fade=t=out:st=14.5:d=0.5[v1];  [2:v]trim=duration=15,fade=t=in:st=0:d=0.5,fade=t=out:st=14.5:d=0.5[v2];  [3:v]trim=duration=15,fade=t=in:st=0:d=0.5,fade=t=out:st=14.5:d=0.5[v3];  [4:v]trim=duration=15,fade=t=in:st=0:d=0.5,fade=t=out:st=14.5:d=0.5[v4];  [v0][v1][v2][v3][v4]concat=n=5:v=1:a=0,format=yuv420p[v]" -map "[v]" out.mp4
+
+
+
+
+
+
+
+9.142 trim
+
+Trim the input so that the output contains one continuous subpart of the input.
+
+It accepts the following parameters:
+
+start
+
+    Specify the time of the start of the kept section, i.e. the frame with the timestamp start will be the first frame in the output.
+end
+
+    Specify the time of the first frame that will be dropped, i.e. the frame immediately preceding the one with the timestamp end will be the last frame in the output.
+
+start_pts
+
+    This is the same as start, except this option sets the start timestamp in timebase units instead of seconds.
+end_pts
+
+    This is the same as end, except this option sets the end timestamp in timebase units instead of seconds.
+duration
+
+    The maximum duration of the output in seconds (thoi gian toi da de ket thuc 1 anh kieu nhu vạy)
+start_frame
+
+    The number of the first frame that should be passed to the output.
+end_frame
+
+    The number of the first frame that should be dropped. 
+
+start, end, and duration are expressed as time duration specifications; see (ffmpeg-utils)the Time duration section in the ffmpeg-utils(1) manual for the accepted syntax.
+
+Note that the first two sets of the start/end options and the duration option look at the frame timestamp, while the _frame variants simply count the frames that pass through the filter. Also note that this filter does not modify the timestamps. If you wish for the output timestamps to start at zero, insert a setpts filter after the trim filter.
+
+If multiple start or end options are set, this filter tries to be greedy and keep all the frames that match at least one of the specified constraints. To keep only the part that matches all the constraints at once, chain multiple trim filters.
+
+The defaults are such that all the input is kept. So it is possible to set e.g. just the end values to keep everything before the specified time.
+
+Examples:
+
+    Drop everything except the second minute of input:
+
+    ffmpeg -i INPUT -vf trim=60:120
+
+    Keep only the first second:
+
+    ffmpeg -i INPUT -vf trim=duration=1
+
+
+
+
+
+http://ffmpeg.org/ffmpeg-filters.html#[0:v]
+
+
+
+-hide_banner để ẩn bớt 1 vài thông tin ko cần thiết của video đi
+
+$ ffmpeg -i video.flv -hide_banner
+
+nếu chỉ dùng : 
+
+$ ffmpeg -i video.flv thì nó sẽ in hết tất cả các thông tin ra 
+
+
+cắt video to list ảnh : 
+Split a video into image
+
+$ ffmpeg -i input2.mp4 slitimage\image%3d.jpg
+
+
+
+-Convert a video into mp3 format :
+ffmpeg -i input.mp4 -vn -ar 44100 -ac 2 -ab 192 -f mp3 audio1.mp3
+
+//https://trungnemo.wordpress.com/category/do-luong-radio/co-ban-ve-audio/
+
+    vn: helps to disable video recording during the conversion : giúp vô hiệu hóa video khi chuyển hóa
+    ar: helps you set audio sampling rate in Hz. : sample rate nay : (Sampling Rate, Sampling Frequency): Là số lần lấy mẫu trên một giây, có đơn vị Hz. Một bản nhạc có sample rate là 44100 Hz thì mỗi giây nhạc sẽ được lấy mẫu 44100 lần.
+    ab: set the audio bitrate : set chat luong am thanh 320, 128....
+    ac: to set the number of audio channels Channel là gì?: Bằng các thuật toán, tín hiệu số sẽ được tách ra thành nhiều kênh (Channel) sao cho khi nghe bằng hệ thống loa thích hợp sẽ có cảm giác như khi đang nghe nhạc trong không gian thực tế. thường là 2 lên méo cần care lắm
+    -f: format. định nghĩa format
+
+- convert video to gif : 
+
+ffmpeg -i input.mp4 anhgif.gif.mp4
+
+xem ung dung video to gif de biet no se chuyen doi co nhung option nao : 
+
+
+
+- Convert avi video file to mpeg :
+
+$ ffmpeg -i video.avi -target pal-dvd -ps 2000000000 -aspect 16:9 video.mpeg
+
+target pal-dvd : Output format
+ps 2000000000 maximum size for the output file, in bits (here, 2 Gb).
+aspect 16:9 : Widescreen
+
+
+
+- Convert a video to CD or DVD format
+
+	ffmpeg -i video.mpg -target vcd vcd_video.mpg
+
+
+- Extract audio from video file
+
+ffmpeg -i video1.avi -vn -ar 44100 -ac 2 -ab 192 -f mp3 audio3.mp3
+
+
+	+ vn de loai bo video khi chuyen hoa :D
+	+ ar : simple rate thuong la 44100
+	+ ac : number of audio channels 
+	+ ab : audio bitreate : chất luong 192k
+	+ f : định dạng file xuất ra 
+
+
+-  Increase/Reduce Video Playback Speed
+
+The -vf option sets the video filters that helps to adjust the speed ( hay con de bat dau 1 video filter do)
+
+cai nay chi lam cham toc do khung hinh thoi ko lam cham audio nhe
+ffmpeg -i input.mp4 -vf "setpts=2*PTS" lowDownvideo.mp4
+
+
+//tang toc do : 
+$ ffmpeg -i video.mpg -vf "setpts=4.0*PTS" lowerspeed.mpg -hide_banner
+
+-hide_banner luc nhin cmd no gon hon thoi 
+
+
+
+
+
+//test file mp3 thong tin ( tuong tu voi file mp4)
+To test audio quality simply use the name of the audio file as follows:
+
+$ ffplay audio_filename1.mp3
+
+
+//cai nay ranh thi lam thoi : 
+
+
+$ ffmpeg -i video.mp4 -i subtitles.srt -map 0 -map 1 -c copy -c:v libx264 -crf 23 -preset veryfast video-output.mkv
+
+
+
+tham khoa them link o day : 
+http://www.tecmint.com/ffmpeg-commands-for-video-audio-and-image-conversion-in-linux/
+
+
+
+
+
+--Encode a video sequence for the iPpod/iPhone
+
+https://sites.google.com/site/tamvm77/cac-thuat-ngu-dinh-dang-file-video-audio-thong-dung
+
+ffmpeg -i source_video.avi input -acodec aac -ab 128kb -vcodec mpeg4 -b 1200kb -mbd 2 -flags +4mv+trell -aic 2 -cmp 2 -subcmp 2 -s 320x180 -title X final_video.mp4
+
+    Source : source_video.avi
+    Audio codec : aac
+    Audio bitrate : 128kb/s
+    Video codec : mpeg4 ( đinh dạng nén nay tuyệt vời và thương dùng voia audio acc acc) 
+
+    /**
+    Thế  CODEC là gì?  CODEC là từ rút gọn từ (COmpressor/DECcompressor), còn được gọi thuật giải (nén và giải nén).
+
+		 MPEG 4 (Moving Picture Experts Group-4) coi như một CODEC hàng đầu, thông dụng nhất hiện nay, còn biết như chuẩn nén hình ảnh, âm thanh có độ bít rate thấp.MPEG-4 còn được chia nhiều nhóm phụ như sau:
+		- phần hình ảnh video MPEG-4 hay Advanced simple profile (ASP) với 2 CODEC thông dụng là DivX, XviD.
+
+		- phần âm thanh audio MPEG-4 hay sử dụng AAC(Advanced Audio Coding) hỗ trợ cho video như MP3, AAC.
+
+		:- Chuẩn mã hoá video MPEG-4 Advanced Video Coding (AVC) mới tiên tiến nhất dùng trong các phim HD hiện nay, chính là CODEC H264.
+
+	
+
+
+
+    Video size : 320px par 180px
+    Generated video : final_video.mp4
+
+
+ 	-vcodec xvid : video codec thuong la mpeg4 tuy nhien thang lom nay no dung : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+- get duration of mp3 : 
+
+lay trong java code android hive
+
+
+- default  8 anh : 40s =>> 5
+11 la 55 *5
+
+
+neu chen nhac vao thi sao ? no se lay thoi gian cua nhac ddungs bang thoi gian cua doan slice hinh
+
+
+- defaul scale trai phai minh chi them hieu ung truyen anh kieu gi thoi
+
+- no co the tang dam duration cua hinh anh tung frame..... thi thoi luong cua video se tang or giam theo
+
+- hoa ra no filter tung anh mot
+- co kha nang chinh frame 
+
+- them các transaction giữa các ảnh 
+
+
+
+
+
+
+
+
+
+
+
+//cai nay con khuy voi dung : 
+
+1. Flip video  vertically:
+
+ffmpeg -i INPUT -vf vflip -c:a copy OUTPUT
+
+2. Flip video horizontally:
+
+ffmpeg -i INPUT -vf hflip -c:a copy OUTPUT
+
+3. Rotate 90 degrees clockwise:
+
+ffmpeg -i INPUT -vf transpose=1 -c:a copy OUTPUT
+
+4. Rotate 90 degrees counterclockwise:
+
+ffmpeg -i INPUT -vf transpose=2 -c:a copy OUTPUT
+
+
+
+
+
+
+//////////////////sdafasdfasdfasdfasdfasdfasdf
+
+ffmpeg -y -loop 1 -i image01.jpg -loop 1 -i image02.jpg -loop 1 -i image03.jpg -i audio2.mp3 -filter_complex "[0:v]zoompan=z='min(zoom+0.0015,1.5)':d=125,trim=duration=5,fade=t=in:st=0:d=0.5,fade=t=out:st=4.5:d=0.5,scale=400*300,setpts=PTS-STARTPTS[v0];[1:v]zoompan=z='min(zoom+0.0015,1.5)':d=125,trim=duration=5,fade=t=in:st=0:d=0.5,fade=t=out:st=4.5:d=0.5,scale=400*300,setpts=PTS-STARTPTS[v1];[2:v]zoompan=z='min(zoom+0.0015,1.5)':d=125,trim=duration=5,fade=t=in:st=0:d=0.5,fade=t=out:st=4.5:d=0.5,scale=400*300,setpts=PTS-STARTPTS[v2]; [v0][v1][v2] concat=n=3:v=1:a=0, format=yuv420p[v]" -map "[v]" -strict -2 xembuibaolau_audioddd.mp4
+
+
+
+
+
+
+ffmpeg -i input.mp4 -i audio.mp3 -map 0:v -map 0:a:0 -map 1:a -metadata:s:a:0 language=eng -metadata:s:a:1 language=sme -codec copy -shortest file_add_audio_replace_1.mp4
+
+ffmpeg -i xembuibaolau_audioddd.mp4 -i audio.mp3 -codec copy -shortest hehe_add_audio.mp4
+
+ffmpeg -i input.mp4 -i audio2.mp3 -codec copy -shortest file_add_audio_add.mp4
+
+ffmpeg -i input.mp4 -i audio2.mp3 -c:v libx264 -c:a libvorbis -shortest hehe_add_audio.mp4
+
+
+
+-b:v : video bitrate 
+
+4. Bit-rate, độ phân giải:
+
+- Bit-rate: là lượng dữ liệu chuyển từ file film lên CPU trong 1 giây để xử lý giải mã thành hình ảnh và âm thanh. Bit-rate càng cao phim càng đẹp, âm thanh càng hay nhưng cũng đồng nghĩa với việc CPU phải giải quyết càng nhiều công việc.
+
+- Độ phân giải: gồm 1080i, 1080p và 720p. Độ phân giải của phim HD tính bằng chiều ngang (1920 đối với 1080p/i) hoặc 1280 (đối với nhân với chiều dọc (biến đổi tùy theo phim) của diện tích hình ảnh (không tính phần băng đen). Ví dụ:
+
+.1080i/p ở tỉ lệ 16:9 có độ phân giải 1920x1080 ~ 2.01 MPx (megapixel)
+./p ở tỉ lệ 2.39:1 có độ phân giải 1920x803 ~ 1.54 MPx
+.720p ở tỉ lệ 16:9 có độ phân giải 1280x720 ~ 0.92 MPx
+.720p ở tỉ lệ 2.39:1 có độ phân giải 1280x536 ~ 0.69 MPx
+
+Rõ ràng là trên lý thuyết cho hình ảnh chi tiết hơn 720p gấp đôi. Tuy nhiên, trên thực tế sự chênh lệch này khó phân biệt bằng mắt thường trên cả TV 720p và 1080p (Full HD) hiện nay:
+
+- đối với TV 720p, việc thể hiện 1080p cũng chỉ cho độ chi tiết ngang với 720p vì đó là giới hạn phân giải của panel
+
+- đối với TV 1080p kích cỡ 46" trở xuống thì ở khoảng cách 2.5m (khoảng cách xem phim đảm bảo) cũng rất khó phân biệt sự khác biệt vì tại vị trí này kích cỡ pixel quá nhỏ để có thể nhận biết bằng mắt thường. Tôi cho rằng, ưu thế của 1080p chỉ có thể nhận biết bằng mắt thường dễ dàng khi màn hình > 60", lúc ấy phim 720p bắt đầu có hiện tượng rạn hình đủ để nhận biết bằng mắt thường.
+
+Tham khảo thêm: màn ảnh rộng ngoài rạp có kích thước lớn gấp vài trăm lần LCD full HD nhưng có độ phân giải (quy đổi) chỉ gấp 5 lần 1080p. Điều đó cho thấy yêu cầu tốc độ tăng diện tích màn hình tăng gấp nhiều lần yêu cầu tăng độ phân giải với chất lượng hình ảnh tương đương.
+
+Mối tương quan giữa bit-rate, độ phân giải với chất lượng HD:
+
+
+
+[IMG]
+
+
+- Xét 1 phim HD 720p @ 2.39:1 (độ phân giải của nó là 0.69 MPx) có bit-rate hình ảnh là 6000 Kbps -> hình ảnh đẹp
+
+- Nếu cũng là phim này nhưng là bản @ 2.39:1 (độ phân giải là 1.54 MPx - gấp 2.23 lần trường hợp trên) thì bit-rate yêu cầu để có chất lượng hình ảnh tương ứng phải đạt được là 6000*2.23=13380 Kbps. Đây là 1 con số tương đối lớn nên nó thường bị cắt xén bớt để hạ thấp dung lượng file.
+
+Từ đây rút ra, nếu bit-rate của phim 1080p thấp hơn 13380 một cách đáng kể, có thể phim sẽ không đẹp bằng bản 720p
+
+Nói dài dòng như ở trên cuối cùng cũng chỉ kết lại vài vấn đề sau:
+- bit-rate quan trọng hơn độ phân giải, như vậy 1 phim 720p cũng có thể đánh gục phim 1080p về chất lượng.
+- 1080p chiếu trên LCD 720p thì cũng chỉ thể hiện 720p
+- 1080p chiếu trên LCD full HD cỡ nhỏ không cho khác biệt đáng kể so với 720p ngay cả khi tương quan bit-rate của chúng là công bằng.
+
+Nhìn vào dung lượng phim có thể thấy được phần nào chất lượng phim thông qua bit-rate và độ phân giải:
+
+File có độ phân giải 1080p thì nên có dung lượng gấp 2.3 lần phim 720p để đảm bảo chất lượng tương ứng.
+
+ 
+
+
+
+
+
+
+
+
+-loop_input Loop over the input stream. Currently it works only for image streams. This option is used for automatic FFserver testing. This option is deprecated, use -loop 1. 
+
+
+
+-y
+
+    overwrite output files without prompting
+
+-r
+
+    Frames Per Second
+    Could also be expressed as: -r 30000/1001 giving a fps of 29.97nnn
+
+    
+
+
+
+
+
+Scaling
+
+Starting with something simple. Resize a 640x480 input to a 320x240 output.
+
+ffmpeg -i input -vf scale=iw/2:-1 output
+
+iw is input width. In this example the input width is 640. 640/2 = 320. The -1 tells the scale filter to preserve the aspect ratio of the output, so in this example the scale filter will choose a value of 240. See the ​FFmpeg documentation for additional information. 
+
+
+
+https://en.wikibooks.org/wiki/OpenGL_Programming/Video_Capture
+
+
+
+https://en.wikibooks.org/wiki/OpenGL_Programming/Video_Capture
+
+
+https://www.virag.si/2014/03/rendering-video-with-opengl-on-android/
+
+
+
+
+//test insert video 
+
+ffmpeg -i input.mp4 -i anh_test.png -filter_complex "overlay='if(gte(t,1), -w+(t-1)*200, NAN)':(main_h-overlay_h)/2"  videoanhchay.mp4
+
+
+//add gif to http://stackoverflow.com/questions/10438713/overlay-animated-images-with-transparency-over-a-static-background-image-using-f
+http://ksloan.net/watermarking-videos-from-the-command-line-using-ffmpeg-filters/
+
+
+
+THUONG NO DUNG MOV
+
+
+
+
+//test link mnoi nao 
+
+
+http://www.bogotobogo.com/FFMpeg/ffmpeg_basic_slide_show_from_images_jpeg.php
+http://www.bogotobogo.com/FFMpeg/ffmpeg_fade_in_fade_out_transitions_effects_filters.php
+
+
+
+https://trac.ffmpeg.org/wiki/Create%20a%20video%20slideshow%20from%20images
+
+https://en.wikibooks.org/wiki/FFMPEG_An_Intermediate_Guide/image_sequence
+
+
+//test 1 vai truong hop nua roi chuyen qua test trong may roi lam thoi 
+
+
+//nho dinh dang no khac nhau thi sao -_- nan giai nhung test not cai fade in out nua thi chuyen cmd nay sang dien thoai ko mat time qua roi T_T
+
+
+ffmpeg -framerate 1/10 -start_number 01 -i image%02d.jpg  -i audio2.mp3 -c:v libx264 -vf "fps=25,format=yuv420p" -c:a copy -shortest  video_slice_chuan.mp4
+
+
+-c:v libx264 -vf "fps=25,format=yuv420p" 
+
+
+
+
+    -r 1/5: each image will have a duration of 5 seconds (the inverse of 1/5 frames per second).
+    e%02d.png: sequential image input.
+    -c:v: video coder.
+    libx264: encoder library.
+    -r 30: will have a frame rate of 30 fps by duplicating the frames accordingly.
+    -pix_fmt yuv420p: pixel format.
+    "Y'UV420p is a planar format, meaning that the Y', U, and V values are grouped together instead of interspersed. The reason for this is that by grouping the U and V values together, the image becomes much more compressible. When given an array of an image in the Y'UV420p format, all the Y' values come first, followed by all the U values, followed finally by all the V values." - wiki.
+    "By default when using libx264, and depending on your input, ffmpeg will attempt to avoid color subsampling. Technically this is preferred, but unfortunately almost all video players, excluding FFmpeg based players, and many online video services only support the YUV color space with 4:2:0 chroma subsampling. Using the options -pix_fmt yuv420p or -vf format=yuv420p will maximize compatibility." - ffmpeg.org.
+    EinsteinSlideShow.mp4: output video file name.
+
+
+
+
+D
+
+
+ 
+ffmpeg -loop 1 -i image01.jpg -loop 1 -i image02.jpg -loop 1 -i image03.jpg -loop 1 -i image04.jpg -loop 1 -i image05.jpg  -filter_complex " [0:v]trim=duration=15; [1:v]trim=duration=15; [2:v]trim=duration=15; [4:v]trim=duration=15; [v0][v1][v2][v3][v4]concat=n=5:v=1:a=0" -i audio2.mp3 -c:v libx264 -c:a copy -shortest changhieusaonua.mp4
+
+
+
+ffmpeg -y -loop 1 -i image01.jpg -loop 1 -i image02.jpg -loop 1 -i image03.jpg -i audio2.mp3  -filter_complex "[0:v]zoompan=z='min(zoom+0.0015,1.5)':d=120:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)',trim=duration=5;[1:v]zoompan=z='min(zoom+0.0015,1.5)':d=125,trim=duration=5,fade=t=in:st=0:d=0.5,fade=t=out:st=4.5:d=0.5,scale=400*300,setpts=PTS-STARTPTS[v1];[2:v]zoompan=z='min(zoom+0.0015,1.5)':d=125,trim=duration=5,fade=t=in:st=0:d=0.5,fade=t=out:st=4.5:d=0.5,scale=400*300,setpts=PTS-STARTPTS[v2]; [v0][v1][v2] concat=n=3:v=1:a=0, format=yuv420p[v]" -map "[v]"     -c:a copy -shortest   xembuibaolau_audio_MOTHER.mp4
+
+
+
+zoompan=z='min(zoom+0.0015,1.5)':d=700:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'
+
+[0:v]zoompan=z='min(zoom+0.0015,1.5)':d=125:x='if(gte(zoom,1.5),x,x+1/a)':y='if(gte(zoom,1.5),y,y+1)'
+
+ASDAÁ
+
+
+ffmpeg -y -loop 1 -i image01.jpg -loop 1 -i image02.jpg -loop 1 -i image03.jpg -i audio2.mp3  -filter_complex " [0:v]zoompan=z='min(zoom+0.0015,1.5)':d=125,trim=duration=5,fade=t=in:st=0:d=0.5,fade=t=out:st=4.5:d=0.5,scale=400*300,setpts=PTS-STARTPTS[v0]; [1:v]zoompan=z='min(zoom+0.0015,1.5)':d=125,trim=duration=5,fade=t=in:st=0:d=0.5,fade=t=out:st=4.5:d=0.5,scale=400*300,setpts=PTS-STARTPTS[v1]; [2:v]zoompan=z='min(zoom+0.0015,1.5)':d=125,trim=duration=5,fade=t=in:st=0:d=0.5,fade=t=out:st=4.5:d=0.5,scale=400*300,setpts=PTS-STARTPTS[v2]; [v0][v1][v2] concat=n=3:v=1:a=0, format=yuv420p[v]" -map "[v]" xembuibaolau_audio.mp4
+
+
+ffmpeg -loop 1 -i image02.jpg -vf "zoompan=z='if(lte(zoom,1.0),1.5,max(1.001,zoom-0.0015))':d=125" -c:v libx264 -t 5 -s "800x450" zoomout.mp4
+
+
+
+
+//new cmd : 
+
+
+//replace music by copy very vert fast :3
+ffmpeg -i input2.mp4 -i audio2.mp3 -map 0:v -map 0:a:0 -map 1:a -metadata:s:a:0 language=eng -metadata:s:a:1 language=sme -codec copy -shortest file_add_audio_replace_2.mp4
+
+
+//clear music : 
+
+ffmpeg -i input2.mp4 -c copy -an example-nosound.mp4
+
+// compare
+
+ffmpeg -i input2.mp4 -i audio2.mp3 -filter_complex "[0:a][1:a]amerge=inputs=2[a]" -map 0:v -map "[a]" -c:v copy -c:a aac -strict experimental -b:a 192k -ac 2 -shortest out_de_audio.mp4
+
+
+
+-i /storage/emulated/0/videosliceshow/currentExect/input2.mp4 -i /storage/emulated/0/videosliceshow/audio/audio_convert.mp3 -map 0:v -map 0:a:0 -map 1:a -metadata:s:a:0 language=eng -metadata:s:a:1 language=sme -codec copy -shortest /storage/emulated/0/videosliceshow/savevideo/video_slice1462864487656.mp4
+
+
+-i input2.mp4 -i audio.mp3 -map 0:v -map 0:a:0 -map 1:a -metadata:s:a:0 language=eng -metadata:s:a:1 language=sme -codec copy -shortest video_slice1462865505210.mp4
+
+-map 0:v -map 0:a:0 -map 1:a -metadata:s:a:0 language=eng -metadata:s:a:1 language=sme -codec copy -shortest\
+
+
+
+
+ffmpeg -i input.mp4 -i input2.mp4 -filter_complex "[0:a]afade=t=out:st=9:d=2[a0];[1:a]afade=t=in:st=0:d=2[a1];aevalsrc=0:d=9[s1];[s1][a1]concat=n=2:v=0:a=1[ac1];[a0][ac1]amix[a]" -map [a] -b:a 128k output_audio.mp3

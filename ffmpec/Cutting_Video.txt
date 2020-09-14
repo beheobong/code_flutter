@@ -1,0 +1,10 @@
+﻿ffmpeg -ss 00:00:02 -i Video/vivivuvu.mp4 -to 00:00:04 -c copy -copyts cut.mp4
+
+Example:
+ffmpeg -ss 00:03:00 -i Video/vivivuvu.mp4 -t 00:00:04 -c copy -copyts -avoid_negative_ts 1 cut.mp4
+
+If you cut with stream copy (-c copy) you need to use the '-avoid_negative_ts 1' option if you want to use that segment with the ​concat demuxer .
+If you want to keep the original timestamps, add the '-copyts' option.
+
+#Refs:
+https://trac.ffmpeg.org/wiki/Seeking#Cuttingsmallsections

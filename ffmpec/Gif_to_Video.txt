@@ -1,0 +1,4 @@
+
+>> ffmpeg -i input.gif output.mp4
+
+>> ffmpeg -i input.gif -c:v libx264 -pix_fmt yuv420p -movflags +faststart out.mp4

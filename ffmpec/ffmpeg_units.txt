@@ -1,0 +1,18 @@
+Scaling:
+
+iw = input width constant;
+ih = input height constant;
+
+ow, oh: The output (scaled) width and height
+
+Ex:
+>> Scale 1/2 width and height: -vf scale=trunc(iw/2)*2:trunc(ih/2)*2
+>> Scale width, keep height: -vf scale=trunc(oh*a/2)*2:720 out_scale.mp4
+Scale and setsar,
+ Ex
+-vf scale=320:320,setsar=sar=1/1
+
+
+Tut:
+https://trac.ffmpeg.org/wiki/Scaling%20(resizing)%20with%20ffmpeg 
+https://ffmpeg.org/ffmpeg-filters.html#scale

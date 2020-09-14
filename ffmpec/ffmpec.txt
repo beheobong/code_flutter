@@ -1,0 +1,6 @@
+﻿FFmpeg: https://github.com/HungTDO/ffmpeg-android-java
+Làm thế nào để gen từ 1 list ảnh -> Video
+Time giữa các bức ảnh
+
+Làm thế nào để trộn video với Audio
+Làm thế nào để nhét 1 cái ảnh trên 1 cái video (Overlay)

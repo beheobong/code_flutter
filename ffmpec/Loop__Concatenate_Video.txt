@@ -1,0 +1,41 @@
+﻿1. For Audio and Video
+# this is a comment
+file '/path/to/file1'
+file '/path/to/file2'
+file '/path/to/file3'
+
+ffmpeg -safe 0 -f concat -i mylist.txt -c copy output.mkv
+
+(Safe see: https://www.ffmpeg.org/ffmpeg-formats.html#Options)
+
+NOTE: 
++ Command above only work when medias same codecs.
+Concatenation of files with different codecs  see on bellow link (#Refs)
++ All files must have the same streams (same codecs, same time base, etc.).
++ Don't put path in text files same path as txt pack: Trick: (http://superuser.com/a/943258/602895)
+1. mnt/sdcard/SlideVideoEditor/Temp/Audio/TempAudioCopy.mp3
+2. /storage/emulated/0/SlideVideoEditor/Temp/Audio/.TempAudioCopy.mp3
+
+
+
+--> https://ffmpeg.org/ffmpeg-formats.html#concat
+
+2. Only for video
+
+If you have MP4 files, these could be losslessly concatenated by first transcoding them to mpeg transport streams. With h.264 video and AAC audio, the following can be used:
+
+ffmpeg -i input1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate1.ts
+ffmpeg -i input2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate2.ts
+ffmpeg -i "concat:intermediate1.ts|intermediate2.ts" -c copy -bsf:a aac_adtstoasc output.mp4
+If you're using a system that supports named pipes, you can use those to avoid creating intermediate files - this sends stderr (which ffmpeg sends all the written data to) to /dev/null, to avoid cluttering up the command-line:
+
+mkfifo temp1 temp2
+ffmpeg -i input1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts temp1 2> /dev/null & \
+ffmpeg -i input2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts temp2 2> /dev/null & \
+ffmpeg -f mpegts -i "concat:temp1|temp2" -c copy -bsf:a aac_adtstoasc output.mp4
+All MPEG codecs (H.264, MPEG4/divx/xvid, MPEG2; MP2, MP3, AAC) are supported in the mpegts container format, though the commands above would require some alteration (the -bsf bitstream filters will have to be changed).
+
+
+#Refs: 
++ https://trac.ffmpeg.org/wiki/Concatenate
+See more: Append_Video.txt

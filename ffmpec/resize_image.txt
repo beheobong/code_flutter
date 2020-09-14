@@ -1,0 +1,1 @@
+ffmpeg -i input.jpg -vf scale=480:480 output.jpg

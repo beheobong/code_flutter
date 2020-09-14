@@ -1,0 +1,26 @@
+Best: 
+Step1: Generate a palette:
+ffmpeg -ss 00:00:03 -i input.flv -t 00:00:10 -vf fps=10,scale=320:-1:flags=lanczos,palettegen palette.png -y
+
+Step2: Output the GIF using the palette:
+ffmpeg -ss 00:00:03 -i input.flv -t 00:00:10 -i palette.png -filter_complex "fps=10,scale=320:-1:flags=lanczos[x];[x][1:v]paletteuse" output.gif -y
+
+or
+Step 1: ffmpeg -i input.mkv -vf palettegen palette.png
+Step 2: ffmpeg -i input.mkv -i palette.png -lavfi paletteuse output.gif
+
+
+#Comments:
+-ss: Start Seeking
+-t: To seeks
+-y: Override file if out file existing.
+
+Remove '-ss and -t' if don't want seekings.
+
+#Refs: 
+http://superuser.com/a/556031/602895
+http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
+https://ffmpeg.org/ffmpeg-filters.html#palettegen
+
+#Notice:
+http://stackoverflow.com/a/19105929/938427

@@ -1,0 +1,5 @@
+Normal:
+ffmpeg -i Video/vivivuvu.mp4 Video/vivivuvu.flv
+
+High Quanlity
+ffmpeg -i Video/vivivuvu.mp4 -c:v libx264 -pix_fmt yuv420p -vf scale=-1:-1 Video/vivivuvu.flv

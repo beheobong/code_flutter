@@ -1,0 +1,15 @@
+2 video must:
+- same dimestion
+- Same sar
+
++ Vcodec
+-i out_vcodec.mp4 -i effect_video/eff_firework.mp4 -filter_complex [0:v][1:v]blend=shortest=1:all_mode='overlay':c0_opacity=0.6 -vcodec mpeg4 -q:v 3 -strict experimental -shortest output_merge_video.mp4
+
++ Yuv420
+-i out_vcodec.mp4 -i effect_video/eff_firework.mp4 -filter_complex [0:v][1:v]blend=shortest=1:all_mode='overlay':c0_opacity=0.6  -pix_fmt yuv420p -q:v 3 -strict experimental -shortest output_merge_video.mp4
+
+
+
+[Parsed_blend_0 @ 00000000021b8de0] First input link top parameters (size 480x48
+0, SAR 100:121) do not match the corresponding second input link bottom paramete
+rs (480x480, SAR 1:1)
