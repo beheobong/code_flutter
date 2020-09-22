@@ -1,0 +1,17 @@
+Social Login
+======================
+
+1. Facebook
+- Sửa đường dẫn redirect button Login Facebook
+<a href="https://www.facebook.com/dialog/oauth?client_id=ID_APP_FB&scope=email&redirect_uri=https://mydomain/auth/social/facebook">Login Facebook</a>
+
+- Sau khi login Facebook thành công, Facebook sẽ redirect về url https://schoolly.famtechvn.com/auth/social/facebook?code=xyz
+- Client call API /public/login/facebook với code nhận được trên redirect url, backend trả về access token, refresh token, user info như API login
+
+
+2. Google
+- Sửa đường dẫn redirect button Login Gmail
+	<a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=https://mydomain.com/auth/social/google&response_type=code&client_id=CLIENT_ID&approval_prompt=force">Login With Gmail</a>
+
+- Sau khi login Google thành công, Google sẽ redirect về url https://mydomain/auth/social/google?code=xyz
+- Client call API /public/login/google với code nhận được trên redirect url, backend trả về access token, refresh token, user info như API login
