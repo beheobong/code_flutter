@@ -1,4 +1,23 @@
-- Ảnh dùng theo 3 size: low: 100px, medium: 300px, high: 500px
+### I. Release Android:
+ 
+Mở terminal project gõ lệnh : 
+```sh 
+flutter build apk
+```
+để lấy file apk
+-> Vào thư mục project/build/app/outputs/flutter-apk/ : để lấy apk
+```sh
+flutter build appbundle --target-platform android-arm,android-arm64,android-x64
+```
+để lấy file appbundle
+-> Vào thư mục project/build/app/outputs/bundle/release/ : để lấy appbundle
+
+### II. Release Ios: 
+Chạy lệnh lấy lib về: ```sh flutter package get ```
+Đóng gói dart sang native: ```sh flutter build ios```
+Mở xcode lên build và upstore như native
+
+##### *Note: Ảnh dùng theo 3 size: low: 100px, medium: 300px, high: 500px
 
 ### A. IOS:
 ```sh
@@ -19,6 +38,9 @@
 - 3 image: 1024x500
 - 4 onesignale icon http://romannurik.github.io/AndroidAssetStudio/icons-notification.html
 - Tạo icon https://makeappicon.com/
+
+
+#### * More
 
 ### C Up app:
 - 1 kiểm tra config ads, debug, link appstore
