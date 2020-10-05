@@ -1,14 +1,8 @@
 ### I. Release Android:
  
-Mở terminal project gõ lệnh : 
-```sh 
-flutter build apk
-```
+Mở terminal project gõ lệnh : ```sh  flutter build apk ```
 để lấy file apk
--> Vào thư mục project/build/app/outputs/flutter-apk/ : để lấy apk
-```sh
-flutter build appbundle --target-platform android-arm,android-arm64,android-x64
-```
+-> Vào thư mục project/build/app/outputs/flutter-apk/ : để lấy apk ```sh flutter build appbundle --target-platform android-arm,android-arm64,android-x64 ```
 để lấy file appbundle
 -> Vào thư mục project/build/app/outputs/bundle/release/ : để lấy appbundle
 
@@ -17,7 +11,6 @@ Chạy lệnh lấy lib về: ```sh flutter package get ```
 Đóng gói dart sang native: ```sh flutter build ios```
 Mở xcode lên build và upstore như native
 
-##### *Note: Ảnh dùng theo 3 size: low: 100px, medium: 300px, high: 500px
 
 ### A. IOS:
 ```sh
@@ -64,3 +57,7 @@ https://support.watchmanmonitoring.com/hc/en-us/articles/213487906-Resolving-dup
 ### F: Android: install .apk programmatically [duplicate]
 
 - https://stackoverflow.com/a/4969421/10819917
+
+
+
+##### *Note: Ảnh dùng theo 3 size: low: 100px, medium: 300px, high: 500px
