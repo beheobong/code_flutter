@@ -1,4 +1,42 @@
 ### I. Release Android:
+
+```sh
+1. Tạo file key jks ( dùng Android studio )
+2. Lưu file vào folder project/android/app
+3. Trong file project/android/gradle.properties thay đổi các thông số sau:
+MYAPP_RELEASE_STORE_FILE=cameraai.jks (tên file key jks vừa tạo)
+MYAPP_RELEASE_KEY_ALIAS=key0 (Tên key)
+MYAPP_RELEASE_STORE_PASSWORD=cameraai	(mật khẩu store)
+MYAPP_RELEASE_KEY_PASSWORD=cameraai  (mật khẩu key)
+ 
+4. Thêm đoạn sau vào file project/android/app/build.gradle :
+android { // thẻ android chứa compileSdkVersion 28
+    signingConfigs {
+       debug {
+           if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+               storeFile file(MYAPP_RELEASE_STORE_FILE)
+               storePassword MYAPP_RELEASE_STORE_PASSWORD
+               keyAlias MYAPP_RELEASE_KEY_ALIAS
+               keyPassword MYAPP_RELEASE_KEY_PASSWORD
+           }
+       }
+       release {
+           if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+               storeFile file(MYAPP_RELEASE_STORE_FILE)
+               storePassword MYAPP_RELEASE_STORE_PASSWORD
+               keyAlias MYAPP_RELEASE_KEY_ALIAS
+               keyPassword MYAPP_RELEASE_KEY_PASSWORD
+           }
+       }
+   }
+   buildTypes {
+       release {
+           signingConfig signingConfigs.release
+           proguardFiles getDefaultProguardFile('proguard-android.txt'), 'app/proguard-rules.pro'
+       }
+   }
+}
+```
  
 Mở terminal project gõ lệnh : ```sh  flutter build apk ```
 để lấy file apk
