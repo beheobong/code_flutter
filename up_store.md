@@ -4,10 +4,10 @@
 1. Tạo file key jks ( dùng Android studio )
 2. Lưu file vào folder project/android/app
 3. Trong file project/android/gradle.properties thay đổi các thông số sau:
-MYAPP_RELEASE_STORE_FILE=cameraai.jks (tên file key jks vừa tạo)
+MYAPP_RELEASE_STORE_FILE=kename.jks (tên file key jks vừa tạo)
 MYAPP_RELEASE_KEY_ALIAS=key0 (Tên key)
-MYAPP_RELEASE_STORE_PASSWORD=cameraai	(mật khẩu store)
-MYAPP_RELEASE_KEY_PASSWORD=cameraai  (mật khẩu key)
+MYAPP_RELEASE_STORE_PASSWORD=password	(mật khẩu store)
+MYAPP_RELEASE_KEY_PASSWORD=password  (mật khẩu key)
  
 4. Thêm đoạn sau vào file project/android/app/build.gradle :
 android { // thẻ android chứa compileSdkVersion 28
