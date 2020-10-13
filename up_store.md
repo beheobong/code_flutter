@@ -38,15 +38,15 @@ android { // thẻ android chứa compileSdkVersion 28
 }
 ```
  
-5. Mở terminal project gõ lệnh : ```sh  flutter build apk ```
+5. Mở terminal project gõ lệnh : ```  flutter build apk ```
 để lấy file apk
--> Vào thư mục project/build/app/outputs/flutter-apk/ : để lấy apk ```sh flutter build appbundle --target-platform android-arm,android-arm64,android-x64 ```
+-> Vào thư mục project/build/app/outputs/flutter-apk/ : để lấy apk ``` flutter build appbundle --target-platform android-arm,android-arm64,android-x64 ```
 để lấy file appbundle
 -> Vào thư mục project/build/app/outputs/bundle/release/ : để lấy appbundle
 
 ### II. Release Ios: 
-Chạy lệnh lấy lib về: ```sh flutter package get ```
-Đóng gói dart sang native: ```sh flutter build ios```
+Chạy lệnh lấy lib về: ``` flutter package get ```
+Đóng gói dart sang native: ``` flutter build ios```
 Mở xcode lên build và upstore như native
 
 
