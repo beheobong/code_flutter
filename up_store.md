@@ -79,6 +79,7 @@ Mở xcode lên build và upstore như native
 - 3 kiểm tra term, privacy
 - 4 Thay server dev vs product
 - 5 Kiểm tra inapp config appstore
+- 6 create privacy and term: https://app-privacy-policy-generator.firebaseapp.com
 
 ### D Up store success:
 - 1 Android Login fb: config sh1, hash key:
