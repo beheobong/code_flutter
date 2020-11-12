@@ -86,6 +86,7 @@ Mở xcode lên build và upstore như native
   + sh1: lấy trên store ch play
   + hash key: run git bash trên windown: 
   ```sh echo <sh1> | xxd -r -p | openssl base64 ```
+  + mac:  ```sh echo -n "abc"| openssl sha1 -binary | base64```
 - 2 Android Firebase auth: config sh1
 
 ### E May ảo 
