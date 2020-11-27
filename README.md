@@ -7,7 +7,7 @@
 - https://web.archive.org/web/20180210044548/http://spring.io/guides/gs/android/
 
 ### emoiji: - https://www.webfx.com/tools/emoji-cheat-sheet/
-            - https://www.alt-codes.net/circle-symbols
+- https://www.alt-codes.net/circle-symbols
 
 ## I. Dart Online:
 - https://dartpad.dartlang.org/
