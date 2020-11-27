@@ -7,6 +7,7 @@
 - https://web.archive.org/web/20180210044548/http://spring.io/guides/gs/android/
 
 ### emoiji: https://www.webfx.com/tools/emoji-cheat-sheet/
+            https://www.alt-codes.net/circle-symbols
 
 ## I. Dart Online:
 - https://dartpad.dartlang.org/
@@ -226,4 +227,6 @@ This is a known issue.
 
 ### 35 How to check internet connection is online /offline in application background?
 - https://www.thetopsites.net/article/55216740.shtml
+
+
 
