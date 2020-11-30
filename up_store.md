@@ -101,3 +101,6 @@ https://support.watchmanmonitoring.com/hc/en-us/articles/213487906-Resolving-dup
 
 
 ##### *Note: Ảnh dùng theo 3 size: low: 100px, medium: 300px, high: 500px
+
+### G: Create drawble android:
+https://www.img-bak.in/tbjNPVCqVzjxLZVIvfGHUT8nMvLhDyIr/
