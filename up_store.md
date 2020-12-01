@@ -45,6 +45,10 @@ android { // thẻ android chứa compileSdkVersion 28
 -> Vào thư mục project/build/app/outputs/bundle/release/ : để lấy appbundle
 
 ### II. Release Ios: 
+#### B1: Đổi bundle id trong xcode, add app mới trên firebase (đồng thời cập nhật file GoogleService-Info.plist)
+#### B2:Config push noti trên firebase: Vào app => Settings => Cloud messaging => thêm APNs Authentication Key (lấy trên acc dev) trong app ios  
+#### B3: Tạo key config trên máy theo guide: https://bitbar.com/blog/tips-and-tricks-how-to-build-ipa-for-ios-app-testing/
+#### B4: Cài đặt flutter và run
 Chạy lệnh lấy lib về: ``` flutter package get ```
 Đóng gói dart sang native: ``` flutter build ios```
 Mở xcode lên build và upstore như native
