@@ -228,5 +228,8 @@ This is a known issue.
 ### 35 How to check internet connection is online /offline in application background?
 - https://www.thetopsites.net/article/55216740.shtml
 
+### 36 How to use BottomNavigationBar with Navigator?
+- https://stackoverflow.com/a/45992604/10819917
+
 
 
