@@ -34,3 +34,6 @@
 ### 9. Flutter Food Delivery Application Design
 - https://github.com/Tarikul711/flutter-food-delivery-app-ui
 
+### 10. Flutter Login Page UI
+- https://github.com/gihan667/flutter-login-ui
+
