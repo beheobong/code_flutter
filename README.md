@@ -1,3 +1,6 @@
+# Page search ui: https://fluttergems.dev/dropdown/
+### UI table the same excel: https://pub.dev/packages/lazy_data_table
+
 # code_flutter: gitub: https://github.com/flutter/flutter
 - tai xcode: https://stackoverflow.com/questions/10335747/how-to-download-xcode-dmg-or-xip-file
 
