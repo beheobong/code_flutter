@@ -87,6 +87,7 @@ Mở xcode lên build và upstore như native
 - 7 tạo web privacy: 
     + https://www.blogger.com/about/
     + google site
+    + https://developers.google.com/youtube/terms/developer-policies-guide
 
 ### D Up store success:
 - 1 Android Login fb: config sh1, hash key:
