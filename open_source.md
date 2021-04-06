@@ -37,3 +37,6 @@
 ### 10. Flutter Login Page UI
 - https://github.com/gihan667/flutter-login-ui
 
+### 11. Social ui
+- https://github.com/vuitv/social_app
+
